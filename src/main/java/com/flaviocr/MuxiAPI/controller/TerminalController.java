@@ -24,7 +24,8 @@ public class TerminalController {
     @GetMapping(value = {"/terminal"}, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.OK)
     public List<TerminalModel> getAll(int page, int size) {
-        return TerminalService.findAll(page, size);
+        return terminalService.findAll(page, size);
     }
+
 
 }
