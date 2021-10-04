@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TerminalRepository extends JpaRepository<TerminalModel, Integer> {
 
+    TerminalModel findByLogic(int logic);
 }

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
 @RestController
@@ -19,13 +18,20 @@ import java.util.List;
 public class TerminalController {
 
     @Autowired
-    TerminalService terminalService;
+    private TerminalService terminalService;
 
     @GetMapping(value = {"/terminal"}, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.OK)
     public List<TerminalModel> getAll(int page, int size) {
         return terminalService.findAll(page, size);
     }
+
+    @GetMapping(value = {"/terminal/{logic}"}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @ResponseStatus(HttpStatus.OK)
+    public TerminalModel findAllByLogic(int logic) {
+        return terminalService.findAllByLogic(logic);
+    }
+
 
 
 }

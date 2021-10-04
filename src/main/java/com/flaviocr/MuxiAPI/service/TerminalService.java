@@ -13,9 +13,15 @@ public class TerminalService {
 
     @Autowired
     static
-    TerminalRepository terminalRepository;
+    private TerminalRepository terminalRepository;
 
     public List<TerminalModel> findAll(int page, int size) {
         return terminalRepository.findAll(PageRequest.of(page, size)).getContent();
     }
+
+    public TerminalModel findAllByLogic(int logic) {
+        return terminalRepository.findByLogic(logic);
+    }
+
+
 }
