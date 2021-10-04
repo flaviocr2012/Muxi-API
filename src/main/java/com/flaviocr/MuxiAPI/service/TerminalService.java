@@ -2,6 +2,7 @@ package com.flaviocr.MuxiAPI.service;
 
 import com.flaviocr.MuxiAPI.model.TerminalModel;
 import com.flaviocr.MuxiAPI.repository.TerminalRepository;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -23,5 +24,11 @@ public class TerminalService {
         return terminalRepository.findByLogic(logic);
     }
 
+    public String save(String payload) {
+        return payload;
+    }
 
+    public String update(TerminalModel terminalModel, int logic) {
+        return null;
+    }
 }
