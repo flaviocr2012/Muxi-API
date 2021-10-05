@@ -1,5 +1,6 @@
 package com.flaviocr.MuxiAPI.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.flaviocr.MuxiAPI.Util.Constants;
@@ -63,11 +64,29 @@ public class TerminalService {
 
     public String update(TerminalModel terminalModel, int logic) {
 
-        try {
-            return terminalRepository.update(terminalModel, logic);
-        } catch (Exception e) {
+        TerminalModel temp = terminalRepository.findByLogic(logic);
 
-            return null;
+        if (temp == null) {
+            return new ErrorResponse(Constants.ENTITY_NOT_FOUND).toString();
+        }
+
+        if (terminalModel.getLogic() != logic) {
+            return new ErrorResponse(Constants.INVALID_ID).toString();
+        } else {
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
+            try {
+                JSONObject jsonObject = new JSONObject(objectMapper.writeValueAsString(terminalModel));
+                JSONObject schema = new JSONObject(JsonEnum.SCHEMA);
+                if (validateSchema(schema, jsonObject)) {
+                    terminalRepository.save(terminalModel);
+                    return jsonObject.toString();
+                } else {
+                    return new ErrorResponse(Constants.INVALID_JSON_SCHEMA).toString();
+                }
+            } catch (JsonProcessingException e) {
+                return new ErrorResponse(Constants.PARSE_ERROR).toString();
+            }
         }
     }
 }
