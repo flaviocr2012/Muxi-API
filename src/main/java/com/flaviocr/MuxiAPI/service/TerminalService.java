@@ -59,6 +59,8 @@ public class TerminalService {
     }
 
     private JSONObject parse(String payload) {
+
+
         return null;
     }
 
