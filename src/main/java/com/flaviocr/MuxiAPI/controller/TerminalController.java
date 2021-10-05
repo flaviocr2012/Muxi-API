@@ -45,4 +45,6 @@ public class TerminalController {
         return terminalService.update(terminalModel, logic);
     }
 
+
+
 }
