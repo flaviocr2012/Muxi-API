@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface TerminalRepository extends JpaRepository<TerminalModel, Integer> {
 
     TerminalModel findByLogic(int logic);
+
+    String update(TerminalModel terminalModel, int logic);
 }

@@ -29,6 +29,12 @@ public class TerminalService {
     }
 
     public String update(TerminalModel terminalModel, int logic) {
-        return null;
+
+        try {
+            return terminalRepository.update(terminalModel, logic);
+        } catch (Exception e) {
+
+            return null;
+        }
     }
 }

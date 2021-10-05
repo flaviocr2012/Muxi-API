@@ -41,10 +41,7 @@ public class TerminalController {
 
     @PutMapping(value = {"/terminal/{logic}"}, consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
-    public String update(TerminalModel terminalModel, int logic) {
+    public String update(@RequestBody @Valid @NotNull TerminalModel terminalModel, @PathVariable int logic) {
         return terminalService.update(terminalModel, logic);
     }
-
-
-
 }
