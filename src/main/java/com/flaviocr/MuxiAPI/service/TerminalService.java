@@ -8,6 +8,9 @@ import com.flaviocr.MuxiAPI.enumerado.JsonEnum;
 import com.flaviocr.MuxiAPI.model.TerminalModel;
 import com.flaviocr.MuxiAPI.repository.TerminalRepository;
 import com.flaviocr.MuxiAPI.response.ErrorResponse;
+import org.everit.json.schema.Schema;
+import org.everit.json.schema.ValidationException;
+import org.everit.json.schema.loader.SchemaLoader;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -54,9 +57,19 @@ public class TerminalService {
         }
     }
 
-    private boolean validateSchema(JSONObject jsonObject, JSONObject schema) {
+    private boolean validateSchema(JSONObject jsonSchema, JSONObject obj) {
 
-        return false;
+        try {
+            SchemaLoader loader = SchemaLoader.builder()
+                    .schemaJson(jsonSchema)
+                    .draftV6Support()
+                    .build();
+            Schema schema = loader.load().build();
+            schema.validate(obj);
+            return true;
+        } catch (ValidationException e) {
+            return false;
+        }
     }
 
     private JSONObject parse(String payload) {
