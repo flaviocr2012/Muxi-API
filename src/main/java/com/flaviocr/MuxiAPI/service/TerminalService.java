@@ -55,13 +55,27 @@ public class TerminalService {
     }
 
     private boolean validateSchema(JSONObject jsonObject, JSONObject schema) {
+
         return false;
     }
 
     private JSONObject parse(String payload) {
 
+        String splitedPayLoad[] = payload.split(Constants.PAYLOAD_DIVIDER);
 
-        return null;
+        JSONObject objectMap = new JSONObject();
+
+        objectMap.put(Constants.PROPERTY_LOGIC, Integer.valueOf(splitedPayLoad[Constants.INDEX_LOGIC]));
+        objectMap.put(Constants.PROPERTY_SERIAL,(splitedPayLoad[Constants.INDEX_SERIAL]));
+        objectMap.put(Constants.PROPERTY_LOGIC, Integer.valueOf(splitedPayLoad[Constants.INDEX_LOGIC]));
+        objectMap.put(Constants.PROPERTY_LOGIC, Integer.valueOf(splitedPayLoad[Constants.INDEX_LOGIC]));
+        objectMap.put(Constants.PROPERTY_LOGIC, Integer.valueOf(splitedPayLoad[Constants.INDEX_LOGIC]));
+        objectMap.put(Constants.PROPERTY_LOGIC, Integer.valueOf(splitedPayLoad[Constants.INDEX_LOGIC]));
+        objectMap.put(Constants.PROPERTY_LOGIC, Integer.valueOf(splitedPayLoad[Constants.INDEX_LOGIC]));
+        objectMap.put(Constants.PROPERTY_LOGIC, Integer.valueOf(splitedPayLoad[Constants.INDEX_LOGIC]));
+        objectMap.put(Constants.PROPERTY_LOGIC, Integer.valueOf(splitedPayLoad[Constants.INDEX_LOGIC]));
+
+        return objectMap;
     }
 
     public String update(TerminalModel terminalModel, int logic) {
